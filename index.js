@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const bodyParser = require('body-parser');
+const config = require('./config/key');
 
 // [ Configure bodyParser ]
+const bodyParser = require('body-parser');
 // application/x-www-form-urlencoded data를 분석해서 가져옴 
 app.use(bodyParser.urlencoded({
     extended: true 
@@ -15,7 +16,7 @@ const { User } = require('./models/User');
 
 // [ Configure mongoDB Connect ]
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://violet:violet@cluster0-yudbh.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
